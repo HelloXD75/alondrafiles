@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Alondra Files</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f0f1a, #1c1c2e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #ff4d6d;
+        }
+
+        #timer {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ff4d6d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>THE ALONDRA FILES</h1>
+    <div id="timer">24:00:00</div>
+
+    <script>
+        // 24 hours in seconds
+        let timeLeft = 24 * 60 * 60;
+
+        const timerElement = document.getElementById("timer");
+
+        function updateTimer() {
+            let hours = Math.floor(timeLeft / 3600);
+            let minutes = Math.floor((timeLeft % 3600) / 60);
+            let seconds = timeLeft % 60;
+
+            hours = hours.toString().padStart(2, "0");
+            minutes = minutes.toString().padStart(2, "0");
+            seconds = seconds.toString().padStart(2, "0");
+
+            timerElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                clearInterval(timerInterval);
+                timerElement.textContent = "TIME'S UP.";
+            }
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+
+</body>
+</html>
