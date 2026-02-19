@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>The Alondra Files</title>
-
     <style>
         body {
             margin: 0;
@@ -15,6 +14,7 @@
             align-items: center;
             font-family: Arial, sans-serif;
             color: white;
+            text-align: center;
         }
 
         h1 {
@@ -31,35 +31,44 @@
             border-radius: 15px;
             box-shadow: 0 0 20px #ff4d6d;
         }
+
+        #message {
+            font-size: 2rem;
+            margin-top: 20px;
+            display: none; /* hidden at first */
+            color: #4dff88;
+            text-shadow: 0 0 10px #4dff88;
+        }
     </style>
 </head>
 <body>
 
     <h1>THE ALONDRA FILES</h1>
     <div id="timer">24:00:00</div>
+    <div id="message">📂 ACCESS GRANTED: The Alondra Files are unlocked!</div>
 
     <script>
         // 24 hours in seconds
         let timeLeft = 24 * 60 * 60;
-
         const timerElement = document.getElementById("timer");
+        const messageElement = document.getElementById("message");
 
         function updateTimer() {
-            let hours = Math.floor(timeLeft / 3600);
-            let minutes = Math.floor((timeLeft % 3600) / 60);
-            let seconds = timeLeft % 60;
-
-            hours = hours.toString().padStart(2, "0");
-            minutes = minutes.toString().padStart(2, "0");
-            seconds = seconds.toString().padStart(2, "0");
-
-            timerElement.textContent = `${hours}:${minutes}:${seconds}`;
-
             if (timeLeft > 0) {
+                let hours = Math.floor(timeLeft / 3600);
+                let minutes = Math.floor((timeLeft % 3600) / 60);
+                let seconds = timeLeft % 60;
+
+                hours = hours.toString().padStart(2, "0");
+                minutes = minutes.toString().padStart(2, "0");
+                seconds = seconds.toString().padStart(2, "0");
+
+                timerElement.textContent = `${hours}:${minutes}:${seconds}`;
                 timeLeft--;
             } else {
                 clearInterval(timerInterval);
-                timerElement.textContent = "TIME'S UP.";
+                timerElement.style.display = "none"; // hide timer
+                messageElement.style.display = "block"; // show message
             }
         }
 
